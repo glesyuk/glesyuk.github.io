@@ -37,21 +37,17 @@
 */
 
 /* media stuff*/
-@mixin for-phone-only {
-    @media (max-width: 599px) { @content; }
+@media screen and (min-width: 600px) {
+  div.text {
+    font-size: 20px;
   }
-  @mixin for-tablet-portrait-up {
-    @media (min-width: 600px) { @content; }
+}
+
+@media screen and (max-width: 600px) {
+  div.text {
+    font-size: 7px;
   }
-  @mixin for-tablet-landscape-up {
-    @media (min-width: 900px) { @content; }
-  }
-  @mixin for-desktop-up {
-    @media (min-width: 1200px) { @content; }
-  }
-  @mixin for-big-desktop-up {
-    @media (min-width: 1800px) { @content; }
-  }
+}
 
 
 .grid-container {
@@ -80,10 +76,10 @@ a { font-size: 1rem; line-height: 1.4; letter-spacing: -.06rem;}
 
 .text {
     text-align:center;
-    padding-top: 10px;
+    /*padding-top: 10px;
     padding-right: 400px;
     padding-bottom: 10px;
-    padding-left: 400px;
+    padding-left: 400px;*/
     /*
     @include for-desktop-up {
         text-align:center;
