@@ -80,7 +80,7 @@ a { font-size: 2rem; line-height: 1.4; letter-spacing: -.06rem;}
 
 .text {
     text-align:center;
-    padding-top: 50px;
+    padding-top: 10px;
     padding-right: 400px;
     padding-bottom: 10px;
     padding-left: 400px;
@@ -92,6 +92,7 @@ a { font-size: 2rem; line-height: 1.4; letter-spacing: -.06rem;}
         padding-bottom: 50px;
         padding-left: 20px;
     }*/
+    word-wrap: normal;
 }
 
 pre code {
@@ -99,6 +100,7 @@ pre code {
   border: 1px solid #999;
   display: inline-block;
   padding: 2.5px;
+  word-wrap: normal;
 }
 
 pre { 
@@ -110,7 +112,13 @@ pre {
   white-space: pre-word;
 }
 
-p { margin-top: 0; }
+p { 
+  word-break: break-all;
+  white-space: normal;
+  margin-top: 0; 
+  font-size:1rem; 
+  line-height:0; 
+}
 
 
 /* Links
