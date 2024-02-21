@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <meta charset="utf-8">
+  <title>Raspberry Pi to Eduroam</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="./css/style.css">
+
+  <link rel="icon" type="image/png" href="./images/favicon-16.png">
+
+</head>
+<body>
+
+
+  <div class="grid-container halves">
+
+    <div class="text">
+      <h1>Connecting a Raspberry Pi to Eduroam in Bristol</h1>
+      <a id="big" href="./index.html">Return to home</a> <br><br>
+      So! You've got a raspberry pi, you've got a screen, a keyboard, a mouse, and the hdmi cable finally came in after 3 weeks of waiting from aliexpress - the shipping was free! You start plugging everything in, Take Five by Dave Brubeck softly playing over your speakers, pleased how smoothly everything's going. Too smoothly.
+      <br>
+      <br>
+      There, it's all set up! The raspberry pi boots! You see the screen flicker to life! Ahh, the bliss of something working on the first try. You open up google, the drums pulsing, the trumpet roaring and you're greeted by the welcoming gaze of a t-rex.
+      <br><br>
+      <img src="./images/dino.png" alt="Chrome Dino Game!">
+      <br><br>
+      You struggle to figure out what's wrong. Oh! You bang your head on the table - you forgot to open up the wifi!
+
+      <h6>You open the wi-fi tab. Eduroam - it's there! 
+      </h6>
+      <br>
+      Apart from the fact, it's not. However hard you try to connect, whatever method you attempt to use, you're simply pushed back to square one. every. time.
+      <br><br>
+      Now, I wish my literary genius could write a perfect segue to the instructions, but I'm cobbling this together at 00:17 (granted, not late at all for an engineer), and I'd rather just write the damn thing. Here goes:
+
+      <h6>
+          Now, there's only got a quick step by step, a full in depth instruction sheet will come soon
+      </h6>
+      <br>
+      Quick linux basics:
+      <pre> <code> ls </code> - lists everything in a directory </pre>
+      <pre> <code> cd [directory] </code> - navigates to [directory] use cd . to return to previous directory, and cd ~ to home </pre> 
+      <pre> <code> rm [file] </code> - removes [file] (dangerous!) THERE IS NO "are you sure you want to delete" </pre>
+      <pre> <code> mv [file] [path] </code> - moves [file] to [place] (place is file path, e.g. /path/to/folder) </pre>
+      <pre> <code> sudo [command] </code> - put at the start of a command, gives administrative power </pre>
+      <pre> <code> nano [file] </code> - think of it as the terminal's built in notepad! but worse! and more annoying! </pre>
+      <br><br>
+      Once again, apologies for the atrocious formatting, this will be fixed very soon!
+      <br>
+    </div>
+
+    <div class="list">
+      
+      
+      
+      
+      <dt><pre>1. Open Terminal </pre></dt>
+      <dt><pre>2. Download the networking certificate file from <a href="https://www.wireless.bris.ac.uk/certs/eaproot/uob-net-ca.crt">here!</a> </pre></dt>
+      
+      <dt><pre>3. Type in <code>sudo service networking stop</code></pre></dt>
+      <dt><pre>4. put your <strong>.crt</strong> file in <strong>/etc/ssl/certs/</strong> </pre></dt>
+      <dd><pre>a. in your raspberry pi, locate the directory the .crt file is in</pre></dd>  
+      <dd><pre>     i. if downloaded, it will be in the downloads folder, navigate to it using <code> cd ~/Downloads </code></pre></dd>
+      <dd><pre>     ii. if you used SCP, it will be in the folder you scp'd it into.</pre></dd>
+      <dd><pre>b. use <code> sudo mv uob-net-ca.crt /etc/ssl/certs/</code></pre></dd>
+      <dt><pre>5. Locate your <strong>wpa_supplicant.conf</strong> file</dt>
+      <dd><pre>a. It will most likely be in: <strong>/etc/wpa_supplicant/</strong></pre></dd>
+      <dd><pre>b. Navigate to the file via <code>cd /etc/wpa_supplicant/</code> </pre></dd>
+      <dt><pre>6. Open + edit <strong>wpa_supplicant.conf</strong></pre></dt>
+      <dd><pre>Open the file via <code>sudo nano wpa_supplicant.conf</code></pre></dd>
+      <dd><pre>In the file (you are now currently in nano), copy in 
+
+        <code>network={
+          #your bristol username
+          identity=""
+          #your password
+          password=""
+          ca_cert="/etc/ssl/certs/uob-net-ca.crt"
+
+          eap=PEAP TTLS
+          anonymous_identity="@bristol.ac.uk"
+          phase1="peaplabel=0"
+          phase2="auth=MSCHAPV2"
+          priority=999
+        
+          disabled=0
+          ssid="eduroam"
+          scan_ssid=0
+          mode=0
+          auth_alg=OPEN
+          proto=WPA RSN
+          pairwise=CCMP TKIP
+          key_mgmt=WPA-EAP
+          proactive_key_caching=1
+        
+}
+      </code> </pre></dd>
+      <dd><pre>Remember to add in your bristol username and password!</pre></dd>
+      <dd><pre>Press <code>Ctrl+x</code>, then <code>Y</code> and then <code>enter</code> in order to save changes to the file</dd>
+      <dd><pre><strong>IF there are other networks in the file, simply add a line with <code>disabled=1</code> to that network!</strong></pre></dd>  
+      <dt><pre>7. Run: <code>sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf</code></pre></dt>
+      <dt><pre>8. Run: <code>sudo dhclient wlan0</code></pre></dt>
+      <dt><pre>9. To check an IP has been assigned, run <code>ifconfig</code> and under <strong>wlan0</strong> there should be an ip address somewhere in the format of xxx.xxx.xxx.xxx</pre></dt>
+      <dd><pre>a. Also, if you simply want to double check - run <code>ping 8.8.8.8</code> (pings google) just to check that there is an internet connection</pre></dd>
+      <dt><pre>10. You should hopefully have a working internet connection now - enjoy!</pre></dt>
+      
+        
+      
+
+    </div>
+  </div>
+
+
+</body>
+</html>
