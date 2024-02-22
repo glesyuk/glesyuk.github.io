@@ -37,15 +37,27 @@
 */
 
 /* media stuff*/
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   div.text {
     font-size: 20px;
   }
+  div.list{
+    padding-top: 10px;
+    padding-right: 400px;
+    padding-bottom: 10px;
+    padding-left: 400px;
+  }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   div.text {
     font-size: 7px;
+  }
+  div.list {
+    padding-top: 10px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-left: 40px;
   }
 }
 
@@ -92,11 +104,6 @@ a { font-size: 1rem; line-height: 1.4; letter-spacing: -.06rem;}
 }
 
 .list {
-
-  /*padding-top: 10px;
-  padding-right: 400px;
-  padding-bottom: 10px;
-  padding-left: 400px;*/
 
   display:inline-block;
   word-wrap:normal;
