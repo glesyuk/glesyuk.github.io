@@ -109,7 +109,10 @@
       <dd><pre>Press <code>Ctrl+x</code>, then <code>Y</code> and then <code>enter</code> in order to save changes to the file</dd>
       <dd><pre><strong>IF there are other networks in the file, simply add a line with 
         <code>disabled=1</code> to that network!</strong></pre></dd>  
-      <dt><pre>7. Run: <code>sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf</code></pre></dt>
+      <dt><pre>7. Run: <code>sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf -B</code></pre></dt>
+      <dd><pre>a. If you get a failure and it says "remove wlan0", run <code>sudo rm /var/run/wpa_supplicant/wlan0</code></pre></dd>
+      <dd><pre>b. Sometimes you get a "p2p connection failed" - do not worry, just run the next few steps and it <em>should</em> work</pre></dd>
+
       <dt><pre>8. Run: <code>sudo dhclient wlan0</code></pre></dt>
       <dt><pre>9. To check an IP has been assigned, run <code>ifconfig</code> and under <strong>wlan0</strong> 
         there should be an ip address somewhere in the format of xxx.xxx.xxx.xxx</pre></dt>
