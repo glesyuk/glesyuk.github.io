@@ -69,7 +69,8 @@
       <dt><pre>3. Type in <code>sudo service networking stop</code></pre></dt>
       <dt><pre>4. put your <strong>.crt</strong> file in <strong>/etc/ssl/certs/</strong> </pre></dt>
       <dd><pre>a. in your raspberry pi, locate the directory the .crt file is in</pre></dd>  
-      <dd><pre>     i. if downloaded, it will be in the downloads folder, navigate to it using <code> cd ~/Downloads </code></pre></dd>
+      <dd><pre>     i. if downloaded, it will be in the downloads folder, 
+        navigate to it using <code> cd ~/Downloads </code></pre></dd>
       <dd><pre>     ii. if you used SCP, it will be in the folder you scp'd it into.</pre></dd>
       <dd><pre>b. use <code> sudo mv uob-net-ca.crt /etc/ssl/certs/</code></pre></dd>
       <dt><pre>5. Locate your <strong>wpa_supplicant.conf</strong> file</dt>
@@ -106,11 +107,14 @@
       </code> </pre></dd>
       <dd><pre>Remember to add in your bristol username and password!</pre></dd>
       <dd><pre>Press <code>Ctrl+x</code>, then <code>Y</code> and then <code>enter</code> in order to save changes to the file</dd>
-      <dd><pre><strong>IF there are other networks in the file, simply add a line with <code>disabled=1</code> to that network!</strong></pre></dd>  
+      <dd><pre><strong>IF there are other networks in the file, simply add a line with 
+        <code>disabled=1</code> to that network!</strong></pre></dd>  
       <dt><pre>7. Run: <code>sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf</code></pre></dt>
       <dt><pre>8. Run: <code>sudo dhclient wlan0</code></pre></dt>
-      <dt><pre>9. To check an IP has been assigned, run <code>ifconfig</code> and under <strong>wlan0</strong> there should be an ip address somewhere in the format of xxx.xxx.xxx.xxx</pre></dt>
-      <dd><pre>a. Also, if you simply want to double check - run <code>ping 8.8.8.8</code> (pings google) just to check that there is an internet connection</pre></dd>
+      <dt><pre>9. To check an IP has been assigned, run <code>ifconfig</code> and under <strong>wlan0</strong> 
+        there should be an ip address somewhere in the format of xxx.xxx.xxx.xxx</pre></dt>
+      <dd><pre>a. Also, if you simply want to double check - run <code>ping 8.8.8.8</code> 
+        (pings google) just to check that there is an internet connection</pre></dd>
       <dt><pre>10. You should hopefully have a working internet connection now - enjoy!</pre></dt>
       
         
