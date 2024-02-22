@@ -93,10 +93,10 @@ a { font-size: 1rem; line-height: 1.4; letter-spacing: -.06rem;}
 
 .list {
 
-  padding-top: 10px;
+  /*padding-top: 10px;
   padding-right: 400px;
   padding-bottom: 10px;
-  padding-left: 400px;
+  padding-left: 400px;*/
 
   display:inline-block;
   word-wrap:normal;
